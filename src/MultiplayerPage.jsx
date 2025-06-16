@@ -825,7 +825,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 
-const SERVER_URL = "http://localhost:4000";
+const SERVER_URL = "https://typingbackend-b2mf.onrender.com";
 
 // Sample paragraphs data
 // const paragraphsData = {

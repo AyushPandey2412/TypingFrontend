@@ -85,7 +85,7 @@
 
 import React, { useState } from "react";
 import { Eye, EyeOff, User, Lock, X } from "lucide-react";
-
+const url ="https://typingbackend-b2mf.onrender.com"
 const Login = ({ onSuccess, onCancel, onSwitchToSignup }) => {
   const [loginInfo, setLoginInfo] = useState({
     username: "",
@@ -115,7 +115,7 @@ const Login = ({ onSuccess, onCancel, onSwitchToSignup }) => {
 
     try {
       // Replace this with your actual axios call
-      const response = await fetch("http://localhost:4000/login", {
+      const response = await fetch(`${url}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
