@@ -1,0 +1,75 @@
+{
+    "words": {
+      "10": [
+        "Increase another see make.",
+        "Quick brown fox jumps.",
+        "Bright sun shines today."
+      ],
+      "25": [
+        "Increase another see make the quick brown fox jumps over the lazy dog.",
+        "Bright sun shines and the flowers bloom in the vibrant garden.",
+        "Learning to type faster improves productivity and efficiency."
+      ],
+      "50": [
+        "Increase another see make the quick brown fox jumps over the lazy dog. Bright sun shines and the flowers bloom in the vibrant garden. Learning to type faster improves productivity and efficiency, allowing you to accomplish more tasks in less time.",
+        "Mastering typing skills involves practice and dedication. The more you type, the more your speed and accuracy improve, leading to better performance in both personal and professional settings.",
+        "Typing tests are a great way to measure your typing speed and accuracy. By regularly practicing, you can track your progress and identify areas that need improvement."
+      ],
+      "100": [
+        "Increase another see make the quick brown fox jumps over the lazy dog. Bright sun shines and the flowers bloom in the vibrant garden. Learning to type faster improves productivity and efficiency, allowing you to accomplish more tasks in less time. Mastering typing skills involves practice and dedication. The more you type, the more your speed and accuracy improve, leading to better performance in both personal and professional settings. Typing tests are a great way to measure your typing speed and accuracy. By regularly practicing, you can track your progress and identify areas that need improvement.",
+        "In today's digital age, typing has become an essential skill. Whether you're drafting emails, writing reports, or engaging in online communication, the ability to type quickly and accurately can significantly enhance your efficiency and effectiveness. Consistent practice and the use of typing tools can help you develop this valuable skill.",
+        "Efficient typing not only saves time but also reduces the strain on your hands and wrists. By maintaining proper typing posture and utilizing ergonomic keyboards, you can improve your typing performance while minimizing the risk of repetitive strain injuries."
+      ],
+      "150": [
+        "Increase another see make the quick brown fox jumps over the lazy dog. Bright sun shines and the flowers bloom in the vibrant garden. Learning to type faster improves productivity and efficiency, allowing you to accomplish more tasks in less time. Mastering typing skills involves practice and dedication. The more you type, the more your speed and accuracy improve, leading to better performance in both personal and professional settings. Typing tests are a great way to measure your typing speed and accuracy. By regularly practicing, you can track your progress and identify areas that need improvement. In today's digital age, typing has become an essential skill. Whether you're drafting emails, writing reports, or engaging in online communication, the ability to type quickly and accurately can significantly enhance your efficiency and effectiveness. Consistent practice and the use of typing tools can help you develop this valuable skill. Efficient typing not only saves time but also reduces the strain on your hands and wrists. By maintaining proper typing posture and utilizing ergonomic keyboards, you can improve your typing performance while minimizing the risk of repetitive strain injuries.",
+        "Developing strong typing skills is crucial for navigating the modern workplace. From data entry to creative writing, the ability to type swiftly and precisely can make a significant difference in your daily tasks. Additionally, proficient typing can boost your confidence when interacting with others through digital platforms, making you a more effective communicator.",
+        "Advanced typing techniques, such as touch typing, allow you to type without looking at the keyboard, further increasing your speed and accuracy. By learning to place your fingers on the correct keys and using muscle memory, you can achieve a higher level of proficiency that will benefit you in various aspects of your professional and personal life."
+      ],
+      "200": [
+        "Increase another see make the quick brown fox jumps over the lazy dog. Bright sun shines and the flowers bloom in the vibrant garden. Learning to type faster improves productivity and efficiency, allowing you to accomplish more tasks in less time. Mastering typing skills involves practice and dedication. The more you type, the more your speed and accuracy improve, leading to better performance in both personal and professional settings. Typing tests are a great way to measure your typing speed and accuracy. By regularly practicing, you can track your progress and identify areas that need improvement. In today's digital age, typing has become an essential skill. Whether you're drafting emails, writing reports, or engaging in online communication, the ability to type quickly and accurately can significantly enhance your efficiency and effectiveness. Consistent practice and the use of typing tools can help you develop this valuable skill. Efficient typing not only saves time but also reduces the strain on your hands and wrists. By maintaining proper typing posture and utilizing ergonomic keyboards, you can improve your typing performance while minimizing the risk of repetitive strain injuries. Additionally, developing advanced typing techniques, such as touch typing, allows you to type without looking at the keyboard, further increasing your speed and accuracy. By learning to place your fingers on the correct keys and using muscle memory, you can achieve a higher level of proficiency that will benefit you in various aspects of your professional and personal life. Ultimately, investing time in improving your typing skills can lead to greater success and satisfaction in your endeavors."
+      ]
+    },
+    "punctuation": {
+      "short": [
+        "Hello! How are you?",
+        "Well done; keep it up!"
+      ],
+      "medium": [
+        "Typing tests, like this one, help improve your skills.",
+        "Consistency is key: practice regularly to see progress."
+      ],
+      "long": [
+        "Effective communication relies on clear punctuation. Proper use of commas, periods, and exclamation marks can enhance the readability and impact of your writing.",
+        "Mastering punctuation not only aids in conveying your message accurately but also adds professionalism to your work. Whether you're writing an essay, a report, or a simple email, attention to punctuation can make a significant difference."
+      ]
+    },
+    "numbers": {
+      "short": [
+        "12345 67890",
+        "1 2 3 4 5"
+      ],
+      "medium": [
+        "Numbers are here: 42, 56, 78, and 99.",
+        "The sequence 7, 14, 21, 28, and 35 continues."
+      ],
+      "long": [
+        "This paragraph mixes numbers: 12345, 67890, and 987654321. Easy enough?",
+        "Calculations such as 3.14159 and 2.71828 are fundamental in mathematics and engineering."
+      ]
+    },
+    "quotes": {
+      "short": [
+        "'Life is beautiful' - Author",
+        "'Stay positive' - Unknown"
+      ],
+      "medium": [
+        "'Success is not final, failure is not fatal: It is the courage to continue that counts.' - Winston Churchill",
+        "'The only way to do great work is to love what you do.' - Steve Jobs"
+      ],
+      "long": [
+        "'In the middle of every difficulty lies opportunity. It is not the strongest of the species that survives, nor the most intelligent, but the one most responsive to change.' - Charles Darwin",
+        "'Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.' - Buddha"
+      ]
+    }
+  }
+  
