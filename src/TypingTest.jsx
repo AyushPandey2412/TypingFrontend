@@ -2295,22 +2295,22 @@ const TypingTest = () => {
 
         {/* Action Buttons */}
         <div className="text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <div className="flex items-center justify-center gap-3 sm:gap-4">
             {!isTimerActive && !testCompleted && countdown === 0 && (
               <button
                 onClick={startTest}
-                className="flex items-center space-x-2 px-6 sm:px-8 py-3 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 text-sm sm:text-base w-full sm:w-auto"
+                className="p-3 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 rounded-lg transition-all duration-200 transform hover:scale-105"
+                title="Start Test"
               >
-                <Play size={18} />
-                <span>Start Test</span>
+                <Play size={20} />
               </button>
             )}
             <button
               onClick={refreshTest}
-              className="flex items-center space-x-2 px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 text-sm sm:text-base w-full sm:w-auto"
+              className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-lg transition-all duration-200 transform hover:scale-105"
+              title={testCompleted ? "Take Another Test" : "Reset Test"}
             >
-              <RotateCcw size={18} />
-              <span>{testCompleted ? "Take Another Test" : "Reset Test"}</span>
+              <RotateCcw size={20} />
             </button>
           </div>
         </div>
