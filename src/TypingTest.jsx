@@ -2294,12 +2294,12 @@ const TypingTest = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="text-center">
+        <div className="text-center mb-4 sm:mb-0">
           <div className="flex items-center justify-center gap-3 sm:gap-4">
             {!isTimerActive && !testCompleted && countdown === 0 && (
               <button
                 onClick={startTest}
-                className="p-3 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 rounded-lg transition-all duration-200 transform hover:scale-105"
+                className="p-3 bg-green-600 hover:bg-green-700 rounded-lg transition-all duration-200 transform hover:scale-105"
                 title="Start Test"
               >
                 <Play size={20} />
@@ -2307,7 +2307,7 @@ const TypingTest = () => {
             )}
             <button
               onClick={refreshTest}
-              className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-lg transition-all duration-200 transform hover:scale-105"
+              className="p-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 transform hover:scale-105"
               title={testCompleted ? "Take Another Test" : "Reset Test"}
             >
               <RotateCcw size={20} />
