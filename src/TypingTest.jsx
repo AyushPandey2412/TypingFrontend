@@ -3716,6 +3716,8 @@ const TypingTest = () => {
               onCancel={handleAuthCancel}
               onSwitchToSignup={handleSwitchToSignup}
             /> */}
+
+            <Login></Login>
             <div className="p-6 text-center">
               <p className="text-gray-300">Import your Login component here</p>
             </div>
@@ -3732,7 +3734,10 @@ const TypingTest = () => {
               onSuccess={handleSignupSuccess}
               onCancel={handleAuthCancel}
               onSwitchToLogin={handleSwitchToLogin}
+
+            
             /> */}
+            <Signup></Signup>
             <div className="p-6 text-center">
               <p className="text-gray-300">Import your Signup component here</p>
             </div>
