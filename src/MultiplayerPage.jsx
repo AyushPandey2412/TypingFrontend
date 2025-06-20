@@ -2096,13 +2096,370 @@ function ModernTypingApp() {
   });
 
 
+// const renderTypingArea = () => {
+//     if (!paragraph) return null;
+
+//     return (
+//       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//         <div className="bg-gray-900 rounded-lg p-4 sm:p-8 lg:p-12 min-h-[300px] sm:min-h-[400px] relative overflow-hidden">
+//           <div className="font-sans text-base sm:text-xl lg:text-3xl leading-relaxed sm:leading-loose text-center max-w-6xl mx-auto">
+//             {paragraph.split('').map((char, index) => {
+//               let className = 'text-gray-500'; // Medium gray for untyped text
+              
+//               if (index < typedText.length) {
+//                 if (typedText[index] === char) {
+//                   className = 'text-gray-200'; // Light gray for correct characters
+//                 } else {
+//                   className = 'text-red-400 bg-red-400/20'; // Red for errors
+//                 }
+//               } else if (index === typedText.length) {
+//                 className = 'text-gray-200 bg-gray-200/20'; // Current cursor position - removed animate-pulse
+//               }
+              
+//               return (
+//                 <span key={index} className={className}>
+//                   {char}
+//                 </span>
+//               );
+//             })}
+//           </div>
+          
+//           <textarea
+//             ref={inputRef}
+//             value={typedText}
+//             onChange={handleTyping}
+//             disabled={timeLeft === 0 || countdown > 0}
+//             className="absolute inset-0 w-full h-full opacity-0 resize-none outline-none bg-transparent"
+//             style={{ caretColor: 'transparent' }}
+//             autoFocus
+//             spellCheck={false}
+//           />
+//         </div>
+        
+//         {/* Countdown overlay - removed animation */}
+//         {countdown > 0 && (
+//           <div className="absolute inset-0 bg-gray-900/90 rounded-lg flex items-center justify-center">
+//             <div className="text-center px-4">
+//               <div className="text-4xl sm:text-6xl lg:text-8xl font-bold text-yellow-500 mb-2 sm:mb-4">
+//                 {countdown}
+//               </div>
+//               <div className="text-lg sm:text-xl text-gray-300">Get Ready...</div>
+//             </div>
+//           </div>
+//         )}
+        
+//         {/* Results overlay - shows immediately when timer ends */}
+//         {showingResults && timeLeft === 0 && countdown === 0 && (
+//           <div className="absolute inset-0 bg-gray-900/80 rounded-lg flex items-center justify-center">
+//             <div className="text-center px-4">
+//               <div className="text-3xl sm:text-4xl font-bold text-yellow-500 mb-2">{wpm}</div>
+//               <div className="text-sm sm:text-base text-gray-300">Words Per Minute</div>
+//               <div className="text-xl sm:text-2xl font-bold text-green-500 mt-2">{accuracy}%</div>
+//               <div className="text-sm sm:text-base text-gray-300">Accuracy</div>
+//               <div className="text-xs sm:text-sm text-gray-400 mt-4">
+//                 Final results calculating...
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     );
+//   };
+
+//   if (!joinedRoom) {
+//     return (
+//       <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4 sm:p-8">
+//         <div className="max-w-6xl w-full">
+//           <div className="text-center mb-8 sm:mb-12">
+//             <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">
+//               TypingTest
+//             </h1>
+//             <p className="text-gray-400 text-base sm:text-lg">Modern multiplayer typing test</p>
+//           </div>
+
+//           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
+//             <div className="bg-gray-800 rounded-xl p-6 sm:p-8 border border-gray-700">
+//               <h2 className="text-xl sm:text-2xl font-bold text-blue-500 mb-4 sm:mb-6">Create Room</h2>
+              
+//               <div className="space-y-4 sm:space-y-6">
+//                 <div>
+//                   <label className="block text-sm font-medium text-gray-300 mb-2">Category</label>
+//                   <select
+//                     value={category}
+//                     onChange={(e) => {
+//                       setCategory(e.target.value);
+//                       setSubcategory("");
+//                       setSelectedWordCount("25");
+//                     }}
+//                     className="w-full bg-gray-700 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+//                   >
+//                     {Object.keys(paragraphsData).map((cat) => (
+//                       <option key={cat} value={cat}>
+//                         {cat.charAt(0).toUpperCase() + cat.slice(1)}
+//                       </option>
+//                     ))}
+//                   </select>
+//                 </div>
+
+//                 {category === "words" && (
+//                   <div>
+//                     <label className="block text-sm font-medium text-gray-300 mb-2">Word Count</label>
+//                     <select
+//                       value={selectedWordCount}
+//                       onChange={(e) => setSelectedWordCount(e.target.value)}
+//                       className="w-full bg-gray-700 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+//                     >
+//                       {Object.keys(paragraphsData.words).map((count) => (
+//                         <option key={count} value={count}>
+//                           {count} words
+//                         </option>
+//                       ))}
+//                     </select>
+//                   </div>
+//                 )}
+
+//                 {category !== "words" && (
+//                   <div>
+//                     <label className="block text-sm font-medium text-gray-300 mb-2">Subcategory</label>
+//                     <select
+//                       value={subcategory}
+//                       onChange={(e) => setSubcategory(e.target.value)}
+//                       className="w-full bg-gray-700 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+//                     >
+//                       <option value="">-- Select --</option>
+//                       {subcategoryOptions[category]?.map((subcat) => (
+//                         <option key={subcat} value={subcat}>
+//                           {subcat.charAt(0).toUpperCase() + subcat.slice(1)}
+//                         </option>
+//                       ))}
+//                     </select>
+//                   </div>
+//                 )}
+
+//                 <div>
+//                   <label className="block text-sm font-medium text-gray-300 mb-2">Timer Duration</label>
+//                   <select
+//                     value={timerDuration}
+//                     onChange={(e) => setTimerDuration(Number(e.target.value))}
+//                     className="w-full bg-gray-700 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+//                   >
+//                     {[15, 30, 45, 60, 120].map((time) => (
+//                       <option key={time} value={time}>
+//                         {time} seconds
+//                       </option>
+//                     ))}
+//                   </select>
+//                 </div>
+
+//                 <button 
+//                   onClick={handleCreateRoom}
+//                   className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+//                 >
+//                   Create Room
+//                 </button>
+//               </div>
+//             </div>
+
+//             <div className="bg-gray-800 rounded-xl p-6 sm:p-8 border border-gray-700">
+//               <h2 className="text-xl sm:text-2xl font-bold text-green-500 mb-4 sm:mb-6">Join Room</h2>
+              
+//               <div className="space-y-4 sm:space-y-6">
+//                 <div>
+//                   <label className="block text-sm font-medium text-gray-300 mb-2">Room Code</label>
+//                   <input
+//                     type="text"
+//                     value={roomCode}
+//                     onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+//                     placeholder="Enter 6-digit code"
+//                     maxLength={6}
+//                     className="w-full bg-gray-700 border border-gray-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-center text-lg sm:text-2xl tracking-widest font-mono"
+//                   />
+//                 </div>
+
+//                 <button 
+//                   onClick={handleJoinRoom}
+//                   className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
+//                 >
+//                   Join Room
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="min-h-screen bg-gray-900 text-gray-100">
+//       <div className="bg-gray-800 border-b border-gray-700 p-3 sm:p-4">
+//         <div className="max-w-4xl mx-auto flex items-center justify-between">
+//           <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+//             TypingTest
+//           </h1>
+//           <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+//             <span className="text-gray-400 hidden sm:inline">Room:</span>
+//             <span className="bg-gray-700 px-2 sm:px-3 py-1 rounded-lg font-mono text-blue-400 border border-gray-700 text-xs sm:text-sm">{roomCode}</span>
+//             <span className="text-gray-300 hidden sm:inline">{isHost ? 'Host' : 'Guest'}</span>
+//             {isHost && <span className="text-yellow-500">👑</span>}
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="max-w-4xl mx-auto p-4 sm:p-8">
+//         {!testStarted ? (
+//           <div className="text-center">
+//             <div className="mb-6 sm:mb-8">
+//               <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-700">
+//                 <div className="flex items-center gap-2">
+//                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+//                   <span className="text-gray-300 text-sm sm:text-base">Timer: {timerDuration}s</span>
+//                 </div>
+//                 <div className="w-4 h-px sm:w-px sm:h-4 bg-gray-600"></div>
+//                 <div className="flex items-center gap-2">
+//                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+//                   <span className="text-gray-300 text-sm sm:text-base">Category: {category}</span>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Simplified Lobby - Just usernames */}
+//             <div className="mb-6 sm:mb-8">
+//               <h3 className="text-base sm:text-lg font-medium text-gray-300 mb-4">Players in Room</h3>
+//               <div className="bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700">
+//                 <div className="space-y-2">
+//                   {users.map((user) => (
+//                     <div key={user.id} className="bg-gray-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-600">
+//                       <span className="text-gray-100 font-medium text-sm sm:text-base">{user.username}</span>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//             </div>
+
+//             {isHost && (
+//               <div className="bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700 mb-6 sm:mb-8">
+//                 <h4 className="text-base sm:text-lg font-medium text-gray-100 mb-4">Preview Text</h4>
+//                 <div className="bg-gray-900 p-3 sm:p-4 rounded-lg border border-gray-700 text-left">
+//                   <p className="text-gray-400 leading-relaxed text-sm sm:text-base">{paragraph || "No paragraph loaded"}</p>
+//                 </div>
+//                 <button 
+//                   onClick={handleStartTest}
+//                   disabled={users.length < 2}
+//                   className={`mt-4 sm:mt-6 font-medium py-2 sm:py-3 px-6 sm:px-8 rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base ${
+//                     users.length < 2 
+//                       ? 'bg-gray-700 text-gray-400 cursor-not-allowed border border-gray-700' 
+//                       : 'bg-green-600 hover:bg-green-700 text-white focus:ring-green-500'
+//                   }`}
+//                 >
+//                   {users.length < 2 ? 'Waiting for 2 players...' : 'Start Test'}
+//                 </button>
+//               </div>
+//             )}
+
+//             {!isHost && (
+//               <div className="bg-gray-800 rounded-xl p-6 sm:p-8 border border-gray-700">
+//                 <div className="w-6 h-6 sm:w-8 sm:h-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-4 animate-spin"></div>
+//                 <p className="text-gray-400 text-sm sm:text-base">Waiting for host to start the test...</p>
+//               </div>
+//             )}
+//           </div>
+//         ) : (
+//           <div className="space-y-6 sm:space-y-8">
+//             {/* Real-time stats display */}
+//             <div className="text-center">
+//               <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700">
+//                 <div className="text-center">
+//                   <div className="text-2xl sm:text-3xl font-bold text-blue-500">{timeLeft}</div>
+//                   <div className="text-xs sm:text-sm text-gray-400">seconds</div>
+//                 </div>
+//                 <div className="text-center">
+//                   <div className="text-2xl sm:text-3xl font-bold text-green-500">{wpm}</div>
+//                   <div className="text-xs sm:text-sm text-gray-400">wpm</div>
+//                 </div>
+//                 <div className="text-center">
+//                   <div className="text-2xl sm:text-3xl font-bold text-yellow-500">{accuracy}%</div>
+//                   <div className="text-xs sm:text-sm text-gray-400">accuracy</div>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Simplified Live leaderboard - Just usernames and stats */}
+//             {Object.keys(realtimeResults).length > 0 && (
+//               <div className="bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-700">
+//                 <h4 className="text-base sm:text-lg font-bold text-gray-100 mb-3 text-center">Live Rankings</h4>
+//                 <div className="space-y-2">
+//                   {Object.entries(realtimeResults)
+//                     .sort((a, b) => b[1].wpm - a[1].wpm)
+//                     .map(([username, stats], index) => (
+//                       <div key={username} className="flex justify-between items-center bg-gray-700 p-2 sm:p-3 rounded-lg border border-gray-600">
+//                         <div className="flex items-center gap-2 sm:gap-3">
+//                           <span className="text-gray-300 font-mono w-4 sm:w-6 text-sm sm:text-base">#{index + 1}</span>
+//                           <span className="text-gray-100 font-medium text-sm sm:text-base">{username}</span>
+//                         </div>
+//                         <div className="text-right">
+//                           <div className="text-blue-500 font-bold text-sm sm:text-base">{stats.wpm} WPM</div>
+//                           <div className="text-gray-400 text-xs sm:text-sm">{stats.accuracy}%</div>
+//                         </div>
+//                       </div>
+//                     ))}
+//                 </div>
+//               </div>
+//             )}
+
+//             {renderTypingArea()}
+
+//             {/* Simplified Final results - Just usernames and stats */}
+//             {finalResults && showingResults && (
+//               <div className="bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700">
+//                 <h4 className="text-lg sm:text-xl font-bold text-gray-100 mb-4 text-center">Final Results</h4>
+//                 <div className="space-y-3">
+//                   {finalResults
+//                     .sort((a, b) => (b.wpm || 0) - (a.wpm || 0))
+//                     .map((result, index) => (
+//                       <div key={index} className="flex justify-between items-center bg-gray-700 p-3 sm:p-4 rounded-lg border border-gray-600">
+//                         <div className="flex items-center gap-3 sm:gap-4">
+//                           <span className="text-gray-300 font-mono w-6 sm:w-8 text-sm sm:text-base">#{index + 1}</span>
+//                           <div className="flex items-center gap-2">
+//                             <span className="text-gray-100 font-medium text-sm sm:text-base">{result.username}</span>
+//                             {index === 0 && (
+//                               <span className="bg-yellow-500 text-gray-900 px-1 sm:px-2 py-1 rounded text-xs font-bold">
+//                                 WINNER
+//                               </span>
+//                             )}
+//                           </div>
+//                         </div>
+//                         <div className="text-right">
+//                           <div className="text-blue-500 font-bold text-sm sm:text-base">{result.wpm || 0} WPM</div>
+//                           <div className="text-gray-400 text-xs sm:text-sm">
+//                             {result.accuracy || 0}% accuracy
+//                           </div>
+//                         </div>
+//                       </div>
+//                     ))}
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default ModernTypingApp;
+
+
+
+
+
 const renderTypingArea = () => {
     if (!paragraph) return null;
 
     return (
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gray-900 rounded-lg p-4 sm:p-8 lg:p-12 min-h-[300px] sm:min-h-[400px] relative overflow-hidden">
-          <div className="font-sans text-base sm:text-xl lg:text-3xl leading-relaxed sm:leading-loose text-center max-w-6xl mx-auto">
+          <div className="font-sans text-lg sm:text-xl lg:text-3xl leading-relaxed sm:leading-loose text-center max-w-6xl mx-auto">
             {paragraph.split('').map((char, index) => {
               let className = 'text-gray-500'; // Medium gray for untyped text
               
@@ -2368,7 +2725,7 @@ const renderTypingArea = () => {
           <div className="space-y-6 sm:space-y-8">
             {/* Real-time stats display */}
             <div className="text-center">
-              <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700">
+              <div className="inline-flex items-center gap-4 sm:gap-8 bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700">
                 <div className="text-center">
                   <div className="text-2xl sm:text-3xl font-bold text-blue-500">{timeLeft}</div>
                   <div className="text-xs sm:text-sm text-gray-400">seconds</div>
@@ -2448,8 +2805,3 @@ const renderTypingArea = () => {
 }
 
 export default ModernTypingApp;
-
-
-
-
-
