@@ -2168,82 +2168,102 @@ function ModernTypingApp() {
 const renderTypingArea = () => {
   if (!paragraph) return null;
 
-  // Split paragraph into words
+  // Split paragraph into words for proper word wrapping
   const words = paragraph.split(' ');
-  const wordsPerLine = 12; // Adjust based on your preference
-  const maxVisibleLines = 3;
   
-  // Calculate current word position
-  const currentText = typedText;
-  const currentWordIndex = currentText.split(' ').length - 1;
+  // Calculate approximate words per line based on average word length
+  // Adjust this number based on your container width and font size
+  const wordsPerLine = 10;
+  const linesPerView = 3;
+  
+  // Calculate current position
+  const typedWords = typedText.trim() ? typedText.trim().split(' ') : [];
+  const currentWordIndex = typedWords.length - 1;
   const currentLineIndex = Math.floor(currentWordIndex / wordsPerLine);
+  const currentViewIndex = Math.floor(currentLineIndex / linesPerView);
   
-  // Calculate which lines to show
-  const startLine = Math.max(0, currentLineIndex - 1);
-  const endLine = Math.min(Math.ceil(words.length / wordsPerLine), startLine + maxVisibleLines);
+  // Calculate which lines to show (3 lines at a time)
+  const startLineIndex = currentViewIndex * linesPerView;
+  const endLineIndex = Math.min(startLineIndex + linesPerView, Math.ceil(words.length / wordsPerLine));
   
-  // Get visible words
-  const visibleWords = words.slice(startLine * wordsPerLine, endLine * wordsPerLine);
-  const visibleText = visibleWords.join(' ');
+  // Get words for current view
+  const startWordIndex = startLineIndex * wordsPerLine;
+  const endWordIndex = Math.min(endLineIndex * wordsPerLine, words.length);
+  const visibleWords = words.slice(startWordIndex, endWordIndex);
   
-  // Calculate offset for character positioning
-  const wordsBeforeVisible = words.slice(0, startLine * wordsPerLine);
-  const textBeforeVisible = wordsBeforeVisible.join(' ') + (wordsBeforeVisible.length > 0 ? ' ' : '');
-  const offsetLength = textBeforeVisible.length;
+  // Create lines from visible words
+  const lines = [];
+  for (let i = 0; i < linesPerView; i++) {
+    const lineStartIndex = i * wordsPerLine;
+    const lineEndIndex = Math.min(lineStartIndex + wordsPerLine, visibleWords.length);
+    const lineWords = visibleWords.slice(lineStartIndex, lineEndIndex);
+    if (lineWords.length > 0) {
+      lines.push(lineWords.join(' '));
+    }
+  }
+
+  // Calculate the text offset for character positioning
+  const textBeforeView = words.slice(0, startWordIndex).join(' ');
+  const offsetLength = textBeforeView.length + (textBeforeView.length > 0 ? 1 : 0);
 
   return (
-    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="bg-gray-900 rounded-lg p-4 sm:p-8 lg:p-12 min-h-[300px] sm:min-h-[400px] relative overflow-hidden">
-        <div className="font-mono text-lg sm:text-xl lg:text-2xl leading-relaxed sm:leading-loose max-w-6xl mx-auto">
-          {/* Render lines */}
-          {Array.from({ length: endLine - startLine }, (_, lineIndex) => {
-            const actualLineIndex = startLine + lineIndex;
-            const lineWords = words.slice(
-              actualLineIndex * wordsPerLine,
-              (actualLineIndex + 1) * wordsPerLine
-            );
-            const lineText = lineWords.join(' ');
-            const lineStartIndex = words.slice(0, actualLineIndex * wordsPerLine).join(' ').length + (actualLineIndex > 0 ? 1 : 0);
+    <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-gray-900 rounded-lg p-8 sm:p-12 lg:p-16 min-h-[300px] relative overflow-hidden">
+        <div className="font-sans text-2xl sm:text-3xl lg:text-4xl leading-relaxed text-center space-y-6">
+          {lines.map((line, lineIndex) => {
+            // Calculate the starting position of this line in the original text
+            const linesBeforeCurrent = lines.slice(0, lineIndex).join(' ');
+            const lineStartPosition = offsetLength + linesBeforeCurrent.length + (lineIndex > 0 ? lineIndex : 0);
             
             return (
-              <div key={lineIndex} className="mb-4">
-                {lineText.split('').map((char, charIndex) => {
-                  const globalIndex = lineStartIndex + charIndex;
-                  let className = 'text-gray-500';
-                  
-                  if (globalIndex < typedText.length) {
-                    if (typedText[globalIndex] === char) {
-                      className = 'text-gray-200';
-                    } else {
-                      className = 'text-red-400 bg-red-400/20';
+              <div key={lineIndex} className="min-h-[60px] flex items-center justify-center">
+                <div className="inline-block">
+                  {line.split('').map((char, charIndex) => {
+                    const globalPosition = lineStartPosition + charIndex;
+                    let className = 'text-gray-500';
+                    
+                    if (globalPosition < typedText.length) {
+                      if (typedText[globalPosition] === char) {
+                        className = 'text-gray-200';
+                      } else {
+                        className = 'text-red-400 bg-red-500/20 rounded-sm';
+                      }
+                    } else if (globalPosition === typedText.length) {
+                      className = 'text-gray-200 bg-yellow-500/30 rounded-sm animate-pulse';
                     }
-                  } else if (globalIndex === typedText.length) {
-                    className = 'text-gray-200 bg-gray-200/20 animate-pulse';
-                  }
+                    
+                    return (
+                      <span key={charIndex} className={className}>
+                        {char}
+                      </span>
+                    );
+                  })}
                   
-                  return (
-                    <span key={`${lineIndex}-${charIndex}`} className={className}>
-                      {char}
+                  {/* Handle space at end of line */}
+                  {lineIndex < lines.length - 1 && (
+                    <span className={
+                      lineStartPosition + line.length < typedText.length
+                        ? typedText[lineStartPosition + line.length] === ' '
+                          ? 'text-gray-200'
+                          : 'text-red-400 bg-red-500/20 rounded-sm'
+                        : lineStartPosition + line.length === typedText.length
+                        ? 'text-gray-200 bg-yellow-500/30 rounded-sm animate-pulse'
+                        : 'text-gray-500'
+                    }>
+                      {' '}
                     </span>
-                  );
-                })}
-                {/* Add space at end of line if not last line */}
-                {lineIndex < endLine - startLine - 1 && lineText.length > 0 && (
-                  <span className={
-                    lineStartIndex + lineText.length < typedText.length
-                      ? typedText[lineStartIndex + lineText.length] === ' '
-                        ? 'text-gray-200'
-                        : 'text-red-400 bg-red-400/20'
-                      : lineStartIndex + lineText.length === typedText.length
-                      ? 'text-gray-200 bg-gray-200/20 animate-pulse'
-                      : 'text-gray-500'
-                  }>
-                    {' '}
-                  </span>
-                )}
+                  )}
+                </div>
               </div>
             );
           })}
+          
+          {/* Show empty lines if we have less than 3 lines */}
+          {Array.from({ length: Math.max(0, 3 - lines.length) }, (_, index) => (
+            <div key={`empty-${index}`} className="min-h-[60px] flex items-center justify-center">
+              <div className="text-gray-600">...</div>
+            </div>
+          ))}
         </div>
         
         <textarea
@@ -2260,25 +2280,25 @@ const renderTypingArea = () => {
       
       {/* Countdown overlay */}
       {countdown > 0 && (
-        <div className="absolute inset-0 bg-gray-900/90 rounded-lg flex items-center justify-center">
+        <div className="absolute inset-0 bg-gray-900/95 rounded-lg flex items-center justify-center">
           <div className="text-center px-4">
-            <div className="text-4xl sm:text-6xl lg:text-8xl font-bold text-yellow-500 mb-2 sm:mb-4">
+            <div className="text-6xl sm:text-7xl lg:text-8xl font-bold text-yellow-500 mb-4">
               {countdown}
             </div>
-            <div className="text-lg sm:text-xl text-gray-300">Get Ready...</div>
+            <div className="text-xl sm:text-2xl text-gray-300">Get Ready...</div>
           </div>
         </div>
       )}
       
       {/* Results overlay */}
       {showingResults && timeLeft === 0 && countdown === 0 && (
-        <div className="absolute inset-0 bg-gray-900/80 rounded-lg flex items-center justify-center">
+        <div className="absolute inset-0 bg-gray-900/90 rounded-lg flex items-center justify-center">
           <div className="text-center px-4">
-            <div className="text-3xl sm:text-4xl font-bold text-yellow-500 mb-2">{wpm}</div>
-            <div className="text-sm sm:text-base text-gray-300">Words Per Minute</div>
-            <div className="text-xl sm:text-2xl font-bold text-green-500 mt-2">{accuracy}%</div>
-            <div className="text-sm sm:text-base text-gray-300">Accuracy</div>
-            <div className="text-xs sm:text-sm text-gray-400 mt-4">
+            <div className="text-4xl sm:text-5xl font-bold text-yellow-500 mb-2">{wpm}</div>
+            <div className="text-lg text-gray-300 mb-4">Words Per Minute</div>
+            <div className="text-2xl sm:text-3xl font-bold text-green-500 mb-1">{accuracy}%</div>
+            <div className="text-lg text-gray-300">Accuracy</div>
+            <div className="text-sm text-gray-400 mt-6">
               Final results calculating...
             </div>
           </div>
@@ -2287,7 +2307,6 @@ const renderTypingArea = () => {
     </div>
   );
 };
-
   if (!joinedRoom) {
     return (
       <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4 sm:p-8">
