@@ -3017,7 +3017,6 @@ const renderTypingArea = () => {
 
 
 
-
   if (!joinedRoom) {
     return (
       <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4 sm:p-8">
@@ -3141,8 +3140,7 @@ const renderTypingArea = () => {
       </div>
     );
   }
-
-  return (
+return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       <div className="bg-gray-800 border-b border-gray-700 p-3 sm:p-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
@@ -3258,45 +3256,50 @@ const renderTypingArea = () => {
                 </div>
               </div>
             )}
-
-            {renderTypingArea()}
-
-            {/* Simplified Final results - Just usernames and stats */}
-            {finalResults && showingResults && (
-              <div className="bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700">
-                <h4 className="text-lg sm:text-xl font-bold text-gray-100 mb-4 text-center">Final Results</h4>
-                <div className="space-y-3">
-                  {finalResults
-                    .sort((a, b) => (b.wpm || 0) - (a.wpm || 0))
-                    .map((result, index) => (
-                      <div key={index} className="flex justify-between items-center bg-gray-700 p-3 sm:p-4 rounded-lg border border-gray-600">
-                        <div className="flex items-center gap-3 sm:gap-4">
-                          <span className="text-gray-300 font-mono w-6 sm:w-8 text-sm sm:text-base">#{index + 1}</span>
-                          <div className="flex items-center gap-2">
-                            <span className="text-gray-100 font-medium text-sm sm:text-base">{result.username}</span>
-                            {index === 0 && (
-                              <span className="bg-yellow-500 text-gray-900 px-1 sm:px-2 py-1 rounded text-xs font-bold">
-                                WINNER
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-blue-500 font-bold text-sm sm:text-base">{result.wpm || 0} WPM</div>
-                          <div className="text-gray-400 text-xs sm:text-sm">
-                            {result.accuracy || 0}% accuracy
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </div>
-            )}
           </div>
         )}
       </div>
+
+      {/* Full-width typing area - moved outside the container */}
+      {testStarted && renderTypingArea()}
+
+      {/* Final results - back in container */}
+      {testStarted && (
+        <div className="max-w-4xl mx-auto p-4 sm:p-8">
+          {/* Simplified Final results - Just usernames and stats */}
+          {finalResults && showingResults && (
+            <div className="bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700">
+              <h4 className="text-lg sm:text-xl font-bold text-gray-100 mb-4 text-center">Final Results</h4>
+              <div className="space-y-3">
+                {finalResults
+                  .sort((a, b) => (b.wpm || 0) - (a.wpm || 0))
+                  .map((result, index) => (
+                    <div key={index} className="flex justify-between items-center bg-gray-700 p-3 sm:p-4 rounded-lg border border-gray-600">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <span className="text-gray-300 font-mono w-6 sm:w-8 text-sm sm:text-base">#{index + 1}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-100 font-medium text-sm sm:text-base">{result.username}</span>
+                          {index === 0 && (
+                            <span className="bg-yellow-500 text-gray-900 px-1 sm:px-2 py-1 rounded text-xs font-bold">
+                              WINNER
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-blue-500 font-bold text-sm sm:text-base">{result.wpm || 0} WPM</div>
+                        <div className="text-gray-400 text-xs sm:text-sm">
+                          {result.accuracy || 0}% accuracy
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
-}
-
+   }
 export default ModernTypingApp;
