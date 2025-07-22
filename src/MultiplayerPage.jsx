@@ -2921,32 +2921,31 @@ function ModernTypingApp() {
     finalResults
   });
 
-
+  
 const renderTypingArea = () => {
   if (!paragraph) return null;
+
   return (
     <div className="relative w-full mx-auto">
       <div className="bg-gray-900 rounded-lg p-4 sm:p-6 md:p-8 lg:p-12 min-h-[300px] sm:min-h-[350px] md:min-h-[400px] relative overflow-hidden">
-        <div className="font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-relaxed whitespace-nowrap overflow-x-auto scrollbar-hide flex items-center justify-start max-w-full">
-          <div className="flex">
-            {paragraph.split('').map((char, index) => {
-              let className = 'text-gray-500';
-              
-              if (index < typedText.length) {
-                className = typedText[index] === char 
-                  ? 'text-gray-200'
-                  : 'text-red-400 bg-red-400/20';
-              } else if (index === typedText.length) {
-                className = 'text-gray-200 bg-gray-200/20 animate-pulse';
-              }
-              
-              return (
-                <span key={index} className={`${className} ${char === ' ' ? 'w-3 sm:w-4 md:w-5 lg:w-6' : ''}`}>
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              );
-            })}
-          </div>
+        <div className="font-sans text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed sm:leading-relaxed md:leading-loose text-center max-w-full mx-auto">
+          {paragraph.split('').map((char, index) => {
+            let className = 'text-gray-500';
+            
+            if (index < typedText.length) {
+              className = typedText[index] === char 
+                ? 'text-gray-200'
+                : 'text-red-400 bg-red-400/20';
+            } else if (index === typedText.length) {
+              className = 'text-gray-200 bg-gray-200/20 animate-pulse';
+            }
+            
+            return (
+              <span key={index} className={className}>
+                {char}
+              </span>
+            );
+          })}
         </div>
         
         <textarea
