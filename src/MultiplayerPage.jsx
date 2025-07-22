@@ -2920,8 +2920,73 @@ function ModernTypingApp() {
     showingResults,
     finalResults
   });
+  const renderTypingArea = () => {
+  if (!paragraph) return null;
 
-  
+  return (
+    <div className="relative w-full mx-auto">
+      <div className="bg-gray-900 rounded-lg p-4 sm:p-6 md:p-8 lg:p-12 min-h-[300px] sm:min-h-[350px] md:min-h-[400px] relative overflow-hidden">
+        <div className="font-mono text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed sm:leading-relaxed md:leading-loose max-w-full mx-auto whitespace-pre-wrap break-words">
+          {paragraph.split('').map((char, index) => {
+            let className = 'text-gray-500';
+            
+            if (index < typedText.length) {
+              className = typedText[index] === char 
+                ? 'text-gray-200' 
+                : 'text-red-400 bg-red-400/20';
+            } else if (index === typedText.length) {
+              className = 'text-gray-200 bg-gray-200/20 animate-pulse';
+            }
+            
+            return (
+              <span key={index} className={className}>
+                {char}
+              </span>
+            );
+          })}
+        </div>
+        
+        <textarea
+          ref={inputRef}
+          value={typedText}
+          onChange={handleTyping}
+          disabled={timeLeft === 0 || countdown > 0}
+          className="absolute inset-0 w-full h-full opacity-0 resize-none outline-none bg-transparent"
+          style={{ caretColor: 'transparent' }}
+          autoFocus
+          spellCheck={false}
+        />
+      </div>
+      
+      {/* Countdown overlay */}
+      {countdown > 0 && (
+        <div className="absolute inset-0 bg-gray-900/90 rounded-lg flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-4xl sm:text-6xl md:text-8xl font-bold text-yellow-500 mb-4 animate-bounce">
+              {countdown}
+            </div>
+            <div className="text-lg sm:text-xl text-gray-300">Get Ready...</div>
+          </div>
+        </div>
+      )}
+      
+      {/* Results overlay */}
+      {showingResults && timeLeft === 0 && countdown === 0 && (
+        <div className="absolute inset-0 bg-gray-900/80 rounded-lg flex items-center justify-center">
+          <div className="text-center px-4">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-500 mb-2">{wpm}</div>
+            <div className="text-sm sm:text-base text-gray-300">Words Per Minute</div>
+            <div className="text-xl sm:text-2xl font-bold text-green-500 mt-2">{accuracy}%</div>
+            <div className="text-sm sm:text-base text-gray-300">Accuracy</div>
+            <div className="text-xs sm:text-sm text-gray-400 mt-4">
+              Final results calculating...
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 const renderTypingArea = () => {
   if (!paragraph) return null;
 
