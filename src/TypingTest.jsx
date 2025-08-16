@@ -10,29 +10,71 @@ import { User, LogOut, Timer, Users, Play, RotateCcw, Menu, X } from "lucide-rea
 import Login from "./Login"
 import Signup from "./Signup"
 
+// const paragraphs = {
+//   words: {
+//     "30": [
+//       "The quick brown fox jumps over the lazy dog. This sentence contains every letter of the alphabet and is commonly used for typing practice.",
+//       "Technology has revolutionized the way we communicate, work, and live our daily lives in the modern world.",
+//       "Learning to type efficiently is an essential skill in today's digital age where computers dominate most workplaces."
+//     ],
+//     "60": [
+//       "In the heart of the bustling city, where skyscrapers touch the clouds and the streets never sleep, there exists a small café that serves the most aromatic coffee. People from all walks of life gather here, sharing stories and creating memories.",
+//       "The art of programming requires patience, logic, and creativity. Every line of code tells a story, and every function serves a purpose in the grand scheme of software development."
+//     ]
+//   },
+//   sentences: {
+//     "easy": [
+//       "The sun rises in the east and sets in the west every single day.",
+//       "Cats are known for their independence and mysterious behavior patterns."
+//     ],
+//     "medium": [
+//       "Artificial intelligence is transforming industries across the globe at an unprecedented pace.",
+//       "Climate change poses significant challenges that require immediate global cooperation."
+//     ]
+//   }
+// };
 const paragraphs = {
   words: {
     "30": [
       "The quick brown fox jumps over the lazy dog. This sentence contains every letter of the alphabet and is commonly used for typing practice.",
       "Technology has revolutionized the way we communicate, work, and live our daily lives in the modern world.",
-      "Learning to type efficiently is an essential skill in today's digital age where computers dominate most workplaces."
+      "Learning to type efficiently is an essential skill in today's digital age where computers dominate most workplaces.",
+      "Reading books not only enhances knowledge but also improves vocabulary, concentration, and imagination.",
+      "Sports play a vital role in maintaining physical fitness, building teamwork, and reducing stress in daily life."
     ],
     "60": [
       "In the heart of the bustling city, where skyscrapers touch the clouds and the streets never sleep, there exists a small café that serves the most aromatic coffee. People from all walks of life gather here, sharing stories and creating memories.",
-      "The art of programming requires patience, logic, and creativity. Every line of code tells a story, and every function serves a purpose in the grand scheme of software development."
+      "The art of programming requires patience, logic, and creativity. Every line of code tells a story, and every function serves a purpose in the grand scheme of software development.",
+      "History teaches us valuable lessons about human achievements and mistakes. Understanding the past helps us create a better future filled with equality, innovation, and hope.",
+      "Nature provides us with fresh air, clean water, and countless resources. It is our duty to preserve forests, rivers, and wildlife for future generations."
+    ],
+    "100": [
+      "The internet has become an indispensable part of modern society. From communication and education to business and entertainment, everything now revolves around the digital world. Students attend online classes, professionals collaborate across continents, and families connect through video calls. While the internet offers countless opportunities, it also poses challenges such as privacy concerns, misinformation, and overdependence on technology. To use it effectively, people must strike a balance between online and offline life, making sure they prioritize mental health, face-to-face interactions, and physical activities.",
+      "Space exploration has always fascinated humankind. From the first moon landing to the exploration of Mars, scientists continue to push the boundaries of what is possible. Satellites orbiting Earth provide weather forecasts, GPS navigation, and global communication. In the coming decades, space tourism may become a reality, allowing ordinary people to travel beyond our planet. However, with these advancements come questions about sustainability, costs, and the impact on the environment. The future of space exploration lies in international cooperation, innovative technology, and responsible use of resources."
     ]
   },
   sentences: {
     "easy": [
       "The sun rises in the east and sets in the west every single day.",
-      "Cats are known for their independence and mysterious behavior patterns."
+      "Cats are known for their independence and mysterious behavior patterns.",
+      "A rainbow appears in the sky after rain when sunlight reflects on water droplets.",
+      "Birds fly in the sky while fish swim in the water below."
     ],
     "medium": [
       "Artificial intelligence is transforming industries across the globe at an unprecedented pace.",
-      "Climate change poses significant challenges that require immediate global cooperation."
+      "Climate change poses significant challenges that require immediate global cooperation.",
+      "Modern medicine has improved life expectancy, but lifestyle diseases continue to rise worldwide.",
+      "Education empowers individuals to make informed decisions and contribute to society in meaningful ways."
+    ],
+    "hard": [
+      "Philosophy often challenges us to question the very foundations of reality, knowledge, and existence, encouraging critical thinking and self-reflection.",
+      "The complexities of global economics require an understanding of trade policies, cultural differences, and the interdependence of markets in an ever-changing world.",
+      "Scientific breakthroughs in genetics, nanotechnology, and artificial intelligence promise revolutionary benefits, but they also raise profound ethical dilemmas for humanity.",
+      "Democracy thrives only when citizens are well-informed, actively engaged, and willing to hold leaders accountable for their decisions."
     ]
   }
 };
+
 
 const TypingTest = () => {
   // Authentication state
